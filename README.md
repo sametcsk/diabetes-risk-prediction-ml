@@ -1,18 +1,22 @@
-# Makine Öğrenmesi ile Diyabet Verisi Analizi
+# Diyabet Riski Tahmini
 
-Bu eğitim projesi, Pima Indians Diabetes veri setinde farklı sınıflandırma
-algoritmalarını karşılaştırır. Amaç klinik tanı koymak değil, veri ön işleme,
-model değerlendirme ve hiperparametre arama adımlarını uygulamaktır.
+Bu eğitim projesi, Pima Indians Diabetes veri setindeki klinik ölçümler üzerinden
+farklı sınıflandırma algoritmalarını karşılaştırır. Çalışma; veri temizleme,
+ölçeklendirme, model karşılaştırma ve hiperparametre arama adımlarını içerir.
 
-## Uygulanan Adımlar
+> Bu proje tıbbi teşhis aracı değildir. Model çıktıları klinik karar veya tedavi
+> amacıyla kullanılamaz.
 
-- Glikoz ve kan basıncı gibi alanlardaki geçersiz sıfır değerlerinin incelenmesi
-- Eksik veya geçersiz değerlerin medyan ile doldurulması
-- Sayısal özelliklerin standartlaştırılması
-- Beş sınıflandırma algoritmasının karşılaştırılması
-- GridSearchCV ile hiperparametre araması
+## Uygulanan İş Akışı
 
-## Temel Sonuçlar
+1. Glikoz, kan basıncı ve BMI gibi alanlardaki tıbben geçersiz sıfırların incelenmesi
+2. Doldurma değerlerinin yalnızca eğitim verisinden öğrenilmesi
+3. Sınıf oranını koruyan eğitim-test ayrımı
+4. Sayısal özelliklerin standartlaştırılması
+5. Beş sınıflandırma algoritmasının karşılaştırılması
+6. GridSearchCV ile hiperparametre araması
+
+## Kayıtlı Sonuçlar
 
 | Model | Test doğruluğu |
 | --- | ---: |
@@ -22,16 +26,26 @@ model değerlendirme ve hiperparametre arama adımlarını uygulamaktır.
 | SVC | %74,68 |
 | K-En Yakın Komşu | %71,43 |
 
-Karar ağacı eğitim verisinde %100 doğruluğa ulaştığı hâlde test doğruluğu
-%74,68'de kalmıştır. Bu fark aşırı öğrenme riskine işaret eder; bu nedenle tek
-başına en iyi model olarak değerlendirilmemelidir.
+Notebook'taki çapraz doğrulamada en yüksek kayıtlı skor yaklaşık **%76,9** ile
+Lojistik Regresyon modeline aittir. Sağlık problemlerinde accuracy tek başına
+yeterli olmadığından precision, recall, F1 ve karmaşıklık matrisi de incelenir.
+
+## Proje Yapısı
+
+```text
+diabetes-risk-prediction-ml/
+├── data/README.md
+├── diabetes_risk_prediction.ipynb
+├── requirements.txt
+└── README.md
+```
+
+Veri lisansı doğrulanmadan veri dosyası depoya eklenmemiştir. Veri setini
+`data/diabetes.csv` yoluna yerleştirin.
 
 ## Çalıştırma
 
 ```bash
-git clone https://github.com/sametcsk/Makine-Ogrenmesi-ile-Diyabet-Analizi.git
-cd Makine-Ogrenmesi-ile-Diyabet-Analizi
-jupyter notebook diyabet-analizi.ipynb
+pip install -r requirements.txt
+jupyter notebook diabetes_risk_prediction.ipynb
 ```
-
-> Bu çalışma yalnızca eğitim amaçlıdır; tıbbi teşhis veya tedavi amacıyla kullanılamaz.
